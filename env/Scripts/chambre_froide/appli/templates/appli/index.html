@@ -1,0 +1,574 @@
+{% extends "appli/base.html" %}
+
+{% load static %} 
+
+{% block body %}
+
+<!-- Page Content  -->
+  <div id="content" class="p-4 p-md-5 pt-5">
+    <div id="chargesExternes" style="display:block;">
+        <h2 class="mb-4">Calcul des charges externes</h2>
+
+        <form method="post" action="{% url 'appli:index'%}">
+            {% csrf_token %}
+            Choisir une zone géographique<br><br>
+            <input type="hidden" id="chargeExternes" name="chargeExternes" value="True">
+            <div class="row clearfix">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="form-line"><strong>Pays</strong>
+                        <input type="text" name="pays" class="form-control" value="Cameroun" disabled required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group drop-custum"><strong>Région</strong>
+                    <select name="region" class="form-control show-tick" required>
+                        <option value="">-- Région --</option>
+                        <option value="1">Adamaoua</option>
+                        <option value="2">Centre</option>
+                        <option value="3">Est</option>
+                        <option value="4">Extrême-Nord</option>
+                        <option value="5">Littoral</option>
+                        <option value="6">Nord</option>
+                        <option value="7">Nord-Ouest</option>
+                        <option value="8">Ouest</option>
+                        <option value="9">Sud</option>
+                        <option value="10">Sud-Est</option>
+                    </select>
+                </div>
+                </div>  
+            </div>
+            <br>
+            Choisir la denrée à entreposer
+            <br><br>
+            <div class="row clearfix">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                    <div class="form-group drop-custum"><strong>Denrées</strong>
+                        <select name="denree" class="form-control show-tick" disabled required>
+                            <option value="poissons">Poissons</option>
+                        </select>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-sm-6"></div>
+                
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="form-line"><strong>Température intérieure (°C)</strong>
+                            <select name="temperatureInterieure" class="form-control show-tick" required>
+                                <option value="">-- temmpérature intérieure --</option>
+                                <option value="20">20</option>
+                                <option value="15">15</option>
+                                <option value="10">10</option>
+                                <option value="5">5</option>
+                                <option value="0">0</option>
+                                <option value="-5">-5</option>
+                                <option value="-10">-10</option>
+                                <option value="-15">-15</option>
+                                <option value="-20">-20</option>
+                                <option value="-25">-25</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="form-line"><strong>Dégré hygrométrique intérieur (%)</strong>
+                    <input type="number" name="degre" class="form-control" value="0" min="0" required>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <br>
+            Choix du type d'isolant
+            <br><br>
+            <div class="row clearfix">
+            <div class="col-sm-6">
+                <div class="form-group drop-custum"><strong>Type d'isolant</strong>
+                    <select name="typeIsolant" class="form-control show-tick" required>
+                        <option value="">-- Type d'isolant --</option>
+                        <option value="1">Liège</option>
+                        <option value="2">Polyuréthane</option>
+                        <option value="3">Polystyrène expansé</option>
+                        <option value="4">Fibre de verre</option>
+                        <option value="5">Caoutchoucs mousses</option>
+                        <option value="6">Laine de roche</option>
+                        <option value="7">klegecell</option>
+                        <option value="8">Styrofoam</option>
+                        <option value="9">foamglass</option>
+                        
+                    </select>
+                </div>
+            </div>
+            </div>
+            <br>
+            Dimensions de la chambre froide
+            <br><br>
+            <div class="row clearfix">
+            
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="form-line"><strong>Longueur (m)</strong>
+                    <input type="number" name="longueur" class="form-control" value="1" min = "1" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="form-line"><strong>Largeur (m)</strong>
+                    <input type="number" name="largeur" class="form-control" value="1" min = "1" required>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="form-line"><strong>Hauteur (m)</strong>
+                    <input type="number" name="hauteur" class="form-control" value="1" min = "1" required>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <br>
+            Type d'entrepôt
+            <br><br>
+            <div class="row clearfix">
+            <div class="col-sm-6">
+                <div class="form-group drop-custum"><strong>Type d'entrepôt</strong>
+                    <select name="TypeEntrepot" class="form-control show-tick" required>
+                        <option value="">-- Entrepôt --</option>
+                        <option value="entrepotAvecSousSol">Entrepôt avec sous sol</option>
+                        <option value="entrepotSansSousSol">Entrepôt sans sous sol</option>
+                    </select>
+                </div>
+            </div>
+
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn-raised g-bg-cyan">Apply</button>
+                    <button type="submit" class="btn btn-raised">Cancel</button>
+                </div>
+            </div>
+        </form>
+
+        <br><br>
+        <div class="table-responsive" id="resultatChargeExternes">
+            <h2 class="mb-4">RESULTATS</h2>
+            
+            <table class="table table-striped">
+                <tbody>
+                    <thead>
+                        <th></th>
+                        <th>Valeurs</th>
+                    </thead>
+                    <tr>
+                        <td>longueur (m)</td>
+                        <td>{{chargeExternes.longueur}}</td>
+                    </tr>
+                    <tr>
+                        <td>largeur (m)</td>
+                        <td>{{chargeExternes.largeur}}</td>
+                    </tr>
+                    <tr>
+                        <td>hauteur (m)</td>
+                        <td>{{chargeExternes.hauteur}}</td>
+                    </tr>
+                    <tr>
+                        <td>Dégré hygrométrique intérieur (%)</td>
+                        <td>{{chargeExternes.degre}}</td>
+                    </tr>
+                    <tr>
+                        <td>typeIsolant</td>
+                        <td>{{chargeExternes.typeIsolant}}</td>
+                    </tr>
+                    <tr>
+                        <td>TypeEntrepot</td>
+                        <td>{{chargeExternes.typeEntrepot}}</td>
+                    </tr>
+                    <tr>
+                        <td>Région</td>
+                        <td>{{chargeExternes.region}}</td>
+                    </tr>
+                    <tr>
+                        <td>température intérieure (°C)</td>
+                        <td>{{chargeExternes.temperatureInterieure}}</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td>Coeff. de conductivité thermique isol</td>
+                        <td>{{chargeExternes.coeffConductivite}}</td>
+                    </tr>
+                    <tr>
+                        <td>Epaisseur d'isolant (m)</td>
+                        <td>{{chargeExternes.epaisseurIsolant}}</td>
+                    </tr>
+                    <tr>
+                        <td>Coefficient global K pour les parois verticales et le plafond</td>
+                        <td>{{chargeExternes.KmurEtPlafond}}</td>
+                    </tr>
+                    <tr>
+                        <td>Coefficient global K pour le plancher</td>
+                        <td>{{chargeExternes.Kplancher}}</td>
+                    </tr>
+                    <tr>
+                        <td>Volume de la chambre froide (m3)</td>
+                        <td>{{chargeExternes.volume}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nombre de renouvellement d'air</td>
+                        <td>{{chargeExternes.nombreRenouvellementDAir}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            
+            <br><br>
+            <table class="table table-striped">
+                <thead>
+                    <th></th>
+                    <th>Surfaces (m2)</th>
+                    <th>Charge (W)</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Plancher</td>
+                        <td>{{chargeExternes.surfacePlancherEtPlafond}}</td>
+                        <td>{{chargeExternes.chargeExternePlancher}}</td>
+                    </tr>
+                    <tr>
+                        <td>Plafond</td>
+                        <td>{{chargeExternes.surfacePlancherEtPlafond}}</td>
+                        <td>{{chargeExternes.chargeExternePlafond}}</td>
+                    </tr>
+                    <tr>
+                        <td>Mur Est</td>
+                        <td>{{chargeExternes.surfaceOuestEtEst}}</td>
+                        <td>{{chargeExternes.chargeExterneMurOuestEtEst}}</td>
+                    </tr>
+                    <tr>
+                        <td>Mur Ouest</td>
+                        <td>{{chargeExternes.surfaceOuestEtEst}}</td>
+                        <td>{{chargeExternes.chargeExterneMurOuestEtEst}}</td>
+                    </tr>
+                    <tr>
+                        <td>Mur Nord</td>
+                        <td>{{chargeExternes.surfaceNordEtSud}}</td>
+                        <td>{{chargeExternes.chargeExterneMurNordEtSud}}</td>
+                    </tr>
+                    <tr>
+                        <td>Mur Sud</td>
+                        <td>{{chargeExternes.surfaceNordEtSud}}</td>
+                        <td>{{chargeExternes.chargeExterneMurNordEtSud}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <br><br>
+            <table class="table table-striped">
+                <tbody>
+                    
+                    <tr>
+                        <td><b>Apport par transmission à travers les parois (W)</b></td>
+                        <td><b>{{chargeExternes.apportParTransmissionATraversLesParois}}</b></td>
+                    </tr>
+                    <tr>
+                        <td><b>Apport par renouvellement d'air (W)</b></td>
+                        <td><b>{{chargeExternes.apportParRenouvellementDAir}}</b></td>
+                    </tr>
+                    <br><br>
+                    <tr>
+                        <td><b>TOTAL CHARGES EXTERNES (W)</b></td>
+                        <td><b>{{chargeExternes.totalChargeExternes}}</b></td>
+                    </tr>
+                </tbody>
+            </table>
+                    
+        </div>
+    </div>
+
+
+    <div id="chargesInternes" style="display:none;">
+      <h2 class="mb-4">Calcul des charges internes</h2>
+  
+        <form method="post" action="{% url 'appli:index'%}">
+          {% csrf_token %}
+          <input type="hidden" id="chargeInternes" name="chargeInternes" value="True">
+          Charges dues à l'éclairage<br><br>
+            <div class="row clearfix">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                      <div class="form-line"><strong>Surface du plancher (m2)</strong>
+                        <input type="number" name="surfacePlancher" class="form-control" value="{{chargeExternes.surfacePlancherEtPlafond}}" disabled>
+                      </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <div class="form-line"><strong>Durée moyenne d'occupation par le personnel (h/jr)</strong>
+                      <input type="number" name="DureeMoyenneDOccupationParLePersonnel" class="form-control" value="480" min = "1" required>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        
+
+                <br>
+                Charges dues aux personnes<br><br>
+                <div class="row clearfix">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                          <div class="form-line"><strong>Nombre de personnes présentes dans la chambre froide</strong>
+                            <input type="number" name="nombrePersonnesPresentesCF" class="form-control" value="0" min="0" required>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <div class="form-line"><strong>Quantité de chaleur dégagée par une personne (W)</strong>
+                          <input type="number" name="qteChaleurDegageeParUnePersonne" class="form-control" value="420" DISABLED required>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                
+
+                <br>
+                Charges dues aux denrées entrantes<br><br>
+                <div class="row clearfix">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                          <div class="form-line"><strong>Masse de la denrée introduite (kg/jour) </strong>
+                            <input type="number" name="masseDenree" class="form-control" value="0" min="0" required>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <div class="form-line"><strong>Température d'introduction de la denrée (°C) </strong>
+                          <input type="number" name="temperatureIntroductionDenree" class="form-control" value="0" required>
+                        </div>
+                      </div>
+                    </div> 
+                </div>
+
+                    <br>
+                
+                        
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn-raised g-bg-cyan">Apply</button>
+                    <button type="submit" class="btn btn-raised">Cancel</button>
+                </div>
+        </form>
+
+        <br><br>
+        <div class="table-responsive" id="resultatChargeInternes">
+            <h2 class="mb-4">RESULTATS</h2>
+            
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td>Surface du plancher (m2)</td>
+                        <td>{{chargeExternes.surfacePlancherEtPlafond}}</td>
+                    </tr>
+                    <tr>
+                        <td>Durée moyenne d'occupation par le personnel (h/jr) </td>
+                        <td>{{chargeInternes.dureeMoyenneDOccupationParLePersonnel}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nombre de personnes présentes dans la chambre froide</td>
+                        <td>{{chargeInternes.nombrePersonnesPresentesCF}}</td>
+                    </tr>
+                    <tr>
+                        <td>Quantité de chaleur dégagée par une personne (W)</td>
+                        <td>{{chargeInternes.qteChaleurDegageeParUnePersonne}}</td>
+                    </tr>
+                    <tr>
+                        <td>Masse de la denrée introduite (kg/jour) </td>
+                        <td>{{chargeInternes.masseDenree}}</td>
+                    </tr>
+                    <tr>
+                        <td>Température d'introduction de la denrée (°C)</td>
+                        <td>{{chargeInternes.temperatureIntroductionDenree}}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Apport dû à la respiration des denrées (W)</b></td>
+                        <td><b>{{chargeInternes.apportRespirationDenrees}}</b></td>
+                    </tr>
+                    <tr>
+                        <td><b>Charges dû à l'éclairage (W)</b></td>
+                        <td><b>{{chargeInternes.chargesDuEclairage}}</b></td>
+                    </tr>
+                    <tr>
+                        <td><b>Charges dû aux personnes (W)</b></td>
+                        <td><b>{{chargeInternes.chargesDuPersonnes}}</b></td>
+                    </tr>
+                    <tr>
+                        <td><b>Charges dû aux denrées entrantes (W)</b></td>
+                        <td><b>{{chargeInternes.apportDuDenreesEntrantes}}</b></td>
+                    </tr>
+                    <br><br>
+                    <tr>
+                        <td><b>TOTAL CHARGES INTERNES (W)</b></td>
+                        <td><b>{{chargeInternes.totalChargeInternes}}</b></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="puissanceFrigorifique" style="display:none;">
+        <h2 class="mb-4">puissance frigorifique</h2>
+    
+        <form method="post" action="{% url 'appli:index'%}">
+            {% csrf_token %}
+            <input type="hidden" id="pFrigorifique" name="pFrigorifique" value="True">
+            <br><br>
+            <div class="row clearfix">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="form-line"><strong>Durée journalière de fonctionnement de l'installation (h)</strong>
+                          <input type="number" name="dureeJournaliereFonctionnementInstallation" class="form-control" value="0" min="0" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-sm-12">
+                    <button type="submit" onclick="javascript:toActiveOne('pFrigorifique', 'chargeInternes', 'chargeExternes' )" class="btn btn-raised g-bg-cyan">Apply</button>
+                    <button type="submit" class="btn btn-raised">Cancel</button>
+                </div>
+            </div>
+        </form>
+
+
+        <br><br>
+        <div class="table-responsive" id="resultatPuissanceFrigorifique">
+            <h2 class="mb-4">RESULTATS</h2>
+            
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td><b>durée journalière du fonctionnement de l'installation (h)</b></td>
+                        <td><b>{{puissanceFrigorifique.dureeJournaliereFonctionnementInstallation}}</b></td>
+                    </tr>
+                    <tr>
+                        <td><b>charge frigorifique intermediaire (W)</b></td>
+                        <td><b>{{puissanceFrigorifique.chargeFrigorifiqueIntermediaire}}</b></td>
+                    </tr>
+                    <tr>
+                        <td><b>puissance frigorifique intermediaire de l'évaporateur (W)</b></td>
+                        <td><b>{{puissanceFrigorifique.puissanceFrigorifiqueIntermediaireEvaporateur}}</b></td>
+                    </tr>
+                    <tr>
+                        <td><b>puissance effective de l'évaporateur (W)</b></td>
+                        <td><b>{{puissanceFrigorifique.puissanceEffectiveEvaporateur}}</b></td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+  
+    <div class="table-responsive" id="details" style="display: none;">
+        <h2 class="mb-4">Détails</h2>
+    
+        <table class="table table-striped">
+            <tbody>
+                <thead>
+                        <th>longueur (m)</th>
+                        <th>largeur (m)</th>
+                        <th>hauteur (m)</th>
+                        <th>Dégré hygrométrique intérieur (%)</th>
+                        <th>typeIsolant</th>
+                        <th>TypeEntrepot</th>
+                        <th>Région</th>
+                        <th>température intérieure (°C)</th>
+                        <th>Coeff. de conductivité thermique isol</th>
+                        <th>Epaisseur d'isolant (m)</th>
+                        <th>Coefficient global K pour les parois verticales et le plafond</th>
+                        <th>Coefficient qlobal K pour le plancher</th>
+                        <th>Volume de la chambre froide (m3)</th>
+                        <th>Nombre de renouvellement d'air</th>
+                        <th>Surface plancher (m2)</th>
+                        <th>Charge plancher (W)</th>
+                        <th>Surface plafond (m2)</th>
+                        <th>Charge plafond (W)</th>
+                        <th>Surface Mur Est (m2)</th>
+                        <th>Charge Mur Est (W)</th>
+                        <th>Surface Mur Ouest (m2)</th>
+                        <th>Charge Mur Ouest(W)</th>
+                        <th>Surface Mur Nord (m2)</th>
+                        <th>Charge Mur Nord (W)</th>
+                        <th>Surface Mur Sud (m2)</th>
+                        <th>Charge Mur Sud (W)</th>
+                        <th>Apport par transmission à travers les parois (W)</th>
+                        <th>Apport par renouvellement d'air (W)</th>
+                        <th>Durée moyenne d'occupation par le personnel (h/jr) </th>
+                        <th>Nombre de personnes présentes dans la chambre froide</th>
+                        <th>Quantité de chaleur dégagée par une personne (W)</th>
+                        <th>Masse de la denrée introduite (kg/jour) </th>
+                        <th>Température d'introduction de la denrée (°C)</th>
+                        <th>Apport dû à la respiration des denrées (W)</th>
+                        <th>Charges dû à l'éclairage (W)</th>
+                        <th>Charges dû aux personnes (W)</th>
+                        <th>Charges dû aux denrées entrantes (W)</th>
+                        <th>Durée journalière du fonctionnement de l'installation (h)</th>
+                        <th>Charge frigorifique intermediaire (W)</th>
+                        <th>Puissance frigorifique intermediaire de l'évaporateur (W)</th>
+                        <th>Puissance effective de l'évaporateur (W)</th>
+    
+                </thead>
+                {% for puissanceFrigorifique in puissancesFrigorifiques %}
+                <tr>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.longueur}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.largeur}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.hauteur}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.degre}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.typeIsolant}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.typeEntrepot}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.region}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.temperatureInterieure}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.coeffConductivite}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.epaisseurIsolant}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.KmurEtPlafond}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.Kplancher}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.volume}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.nombreRenouvellementDAir}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.surfacePlancherEtPlafond}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.puissanceFrigorifique.chargeInternes.chargeExternesPlancher}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.surfacePlancherEtPlafond}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.puissanceFrigorifique.chargeInternes.chargeExternesPlafond}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.surfaceOuestEtEst}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.puissanceFrigorifique.chargeInternes.chargeExternesMurOuestEtEst}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.surfaceOuestEtEst}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.puissanceFrigorifique.chargeInternes.chargeExternesMurOuestEtEst}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.surfaceNordEtSud}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.puissanceFrigorifique.chargeInternes.chargeExternesMurNordEtSud}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.surfaceNordEtSud}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.chargeExterneMurNordEtSud}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.apportParTransmissionATraversLesParois}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargeExternes.apportParRenouvellementDAir}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.dureeMoyenneDOccupationParLePersonnel}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.nombrePersonnesPresentesCF}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.qteChaleurDegageeParUnePersonne}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.masseDenree}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.temperatureIntroductionDenree}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.apportRespirationDenrees}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargesDuEclairage}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.chargesDuPersonnes}}</td>
+                    <td>{{puissanceFrigorifique.chargeInternes.apportDuDenreesEntrantes}}</td>
+                    
+                    <td>{{puissanceFrigorifique.dureeJournaliereFonctionnementInstallation}}</td>
+                    <td><b>{{puissanceFrigorifique.chargeFrigorifiqueIntermediaire}}</b></td>
+                    <td><b>{{puissanceFrigorifique.puissanceFrigorifiqueIntermediaireEvaporateur}}</b></td>
+                    <td><b>{{puissanceFrigorifique.puissanceEffectiveEvaporateur}}</b></td>
+                    
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+  </div>
+  {% endblock %}

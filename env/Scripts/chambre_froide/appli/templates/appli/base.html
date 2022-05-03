@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Sidebar 09</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="./static/appli/css/style.css">
+        <script language="javascript">
+            function DeleteVisibility2(bouton0, bouton1, bouton2, bouton3) {
+            var div0 = document.getElementById(bouton0);
+            var div1 = document.getElementById(bouton1);
+            var div2 = document.getElementById(bouton2);
+            var div3 = document.getElementById(bouton3);
+            div0.style.display = "block";
+            div1.style.display = "none";
+            div2.style.display = "none";
+            div3.style.display = "none";
+        
+            }
+
+            function DeleteVisibility(bouton0) {
+            var div0 = document.getElementById(bouton0);
+            div0.style.display = "block"
+            }
+            
+            function toActiveOne(bouton0, bouton1, bouton2){
+              var a = document.getElementById(bouton0)
+              var b = document.getElementById(bouton1)
+              var c = document.getElementById(bouton2)
+              
+              var X = [b, c];
+              for (let i=0; i<X.length; i++) {
+                X[i].value = "False";
+                console.log(X[i]);
+              }
+              a.value = "True";
+              console.log(a);
+            }
+        </script>
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="custom-menu">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+	        </button>
+        </div>
+	  		<div class="img bg-wrap text-center py-4" style="background-image: url(./static/appli/images/bg_1.jpg);">
+          <br><br><br><br><br><br><br><br><br>  	
+	  		</div>
+        <ul class="list-unstyled components mb-5">
+          <li class="active">
+            <a href="#" onclick="javascript:DeleteVisibility2('chargesExternes', 'chargesInternes', 'puissanceFrigorifique', 'details'); javascript:toActiveOne('chargeExternes', 'chargeInternes', 'pFrigorifique' );"><span class="fa m-2"></span><br> Charges externes<br><br></a>
+          </li>
+          <li class="active">
+              <a href="#" onclick="javascript:DeleteVisibility2('chargesInternes', 'chargesExternes', 'puissanceFrigorifique', 'details'); javascript:toActiveOne('chargeInternes', 'chargeExternes', 'pFrigorifique' );"><span class="fa m-2"></span><br>Charges internes<br><br></a>
+          </li>
+          <li class="active">
+            <a href="#" onclick="javascript:DeleteVisibility2('puissanceFrigorifique', 'chargesInternes', 'chargesExternes', 'details'); javascript:toActiveOne('pFrigorifique', 'chargeInternes', 'chargeExternes' )"><span class="fa m-2"></span><br>Puissance frigorifique<br><br></a>
+          </li>
+          <li class="active">
+            <a href="#" onclick="javascript:DeleteVisibility2('details', 'chargesInternes', 'chargesExternes', 'puissanceFrigorifique');"><span class="fa m-2"></span><br>Details<br><br></a>
+            <!--a href="{% url 'appli:liste' %}">Details</a-->
+          </li>
+        </ul>
+
+    	</nav>
+
+        <!-- Page Content  -->
+        {% block body %}
+
+        {% endblock %}
+    <script src="./static/appli/js/jquery.min.js"></script>
+    <script src="./static/appli/js/popper.js"></script>
+    <script src="./static/appli/js/bootstrap.min.js"></script>
+    <script src="./static/appli/js/main.js"></script>
+  </body>
+</html>

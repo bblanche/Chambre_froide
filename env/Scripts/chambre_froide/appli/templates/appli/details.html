@@ -1,0 +1,31 @@
+{% extends "appli/base.html" %}
+
+{% load static %} 
+
+{% block body %}
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <td>longueur (m)</td>
+                <td>largeur (m)</td>
+                <td>hauteur (m)</td>
+                <td>degre</td>
+                <td>typeIsolant</td>
+                <td>TypeEntrepot</td>
+                <td>température intérieure (°C)</td>
+            </tr>
+            {% for chargeExterne in chargeExternes %}
+            <tr>
+                <td>{{chargeExterne.longueur}}</td>
+                <td>{{chargeExterne.largeur}}</td>
+                <td>{{chargeExterne.hauteur}}</td>
+                <td>{{chargeExterne.degre}}</td>
+                <td>{{chargeExterne.typeIsolant}}</td>
+                <td>{{chargeExterne.TypeEntrepot}}</td>
+                <td>{{chargeExterne.temperatureInterieure}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+
+{% endblock %}
